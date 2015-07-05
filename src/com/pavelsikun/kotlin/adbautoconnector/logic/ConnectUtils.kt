@@ -34,10 +34,7 @@ fun tryConnect(from: String, to: String) {
     to.split('.').forEach { it.toInt().let { tos.add(it) } }
 
     val validIps =
-            if(froms.size() == tos.size() //ips should have the same length(4 blocks), block0 && block1 should be equal
-                    && froms[0] == tos[0]
-                    && froms[1] == tos[1]
-                    && froms[2] <= tos[2]) true
+            if(froms[0] == tos[0] && froms[1] == tos[1] && froms[2] <= tos[2]) true
             else false
 
     if(validIps) {
