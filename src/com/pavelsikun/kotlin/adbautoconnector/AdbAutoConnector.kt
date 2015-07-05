@@ -31,7 +31,9 @@ object ScriptStarter {
             1 -> tryConnect(config.single)
             2 -> tryConnect(config.rangeFrom, config.rangeTo)
         }
-        Timer().schedule(object: TimerTask() { override fun run() { System.exit(0)} }, 5000L) //hack to force-stop.
+        Timer().schedule(object: TimerTask() { override fun run() {
+            log("finished executing")
+            System.exit(0)} }, 5000L) //hack to force-stop.
     }
 }
 

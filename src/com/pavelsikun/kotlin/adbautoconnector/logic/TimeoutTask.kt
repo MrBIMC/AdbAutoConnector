@@ -17,7 +17,7 @@ abstract class TimeoutTask<T>(val countdown: Long) {
     })
 
     private val countDownTask = object: TimerTask() {
-        override fun run(){
+        override fun run() {
             thread.interrupt()
         }
     }

@@ -15,7 +15,7 @@ data class Config(var mode: Int = 0,
                   var rangeTo: String = "192.168.5.255")
 
 fun openConfig(): Config {
-    try { return jacksonObjectMapper().readValue(File("config.json"), javaClass<Config>()) }
+    try { return jacksonObjectMapper().readValue(File(".adb-config.json"), javaClass<Config>()) }
     catch(e: Exception) {
         log("config doesn't exist! Creating new default config now!")
         val config = Config()
@@ -24,11 +24,11 @@ fun openConfig(): Config {
     }
 }
 
-fun saveConfig(config: Config) = jacksonObjectMapper().writeValue(File("config.json"), config)
+fun saveConfig(config: Config) = jacksonObjectMapper().writeValue(File(".adb-config.json"), config)
 
-fun log(msg: String) = File("logs.txt").appendText("${Date()}:  $msg\n")
+fun log(msg: String) = File(".adb-logs.txt").appendText("${Date()}:  $msg\n")
 
-fun printLogs() = File("logs.txt").forEachLine {  println(it) }
+fun printLogs() = File(".adb-logs.txt").forEachLine {  println(it) }
 
 private val IPADDRESS_PATTERN =
 "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
@@ -39,6 +39,7 @@ private val IPADDRESS_PATTERN =
 fun String.isValidIp() = Pattern.compile(IPADDRESS_PATTERN).matcher(this).matches()
 
 fun notify(msg: String) {
+    log("success - $msg")
     fun notifyMac() {
         val command = """display notification "$msg" with title "ADB AutoConnecor" sound name "default" """
         val code = arrayOf("osascript", "-e", command)
