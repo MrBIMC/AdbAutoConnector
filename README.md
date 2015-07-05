@@ -18,7 +18,7 @@ so I decided to make an app that will do it for me.
 * Make something to act as windows notifications (but idk what should i do here)
 * pack it into app-bundle(for osx), make shortcuts for win && lin
 
-## HOW 2 USE IT(before I make normal launchers)
+### HOW 2 USE IT(before I make normal launchers)
 
 1. Grab .jar and .sh scripts from the "generated" folder of the repo
 2. launch "sh SCRIPTNAME.sh" for adbautoconnector script or configurator gui(whatever you want).
@@ -26,4 +26,4 @@ so I decided to make an app that will do it for me.
 4. If fail - check logs ("cat .adb-logs.txt").
 
 
-# Pull-requests are welcome!!
+## Pull-requests are welcome!!
