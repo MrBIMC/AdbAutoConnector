@@ -14,12 +14,10 @@ import kotlin.properties.Delegates
  * Created by mrbimc on 04.07.15.
  */
 public fun main(vararg args: String) {
-//    tryConnect("192.168.0.102", "192.168.2.103")
-//    tryConnect("192.168.1.39")
-//    Timer().schedule(object: TimerTask() { override fun run() { System.exit(0)} }, 10000L) //hack to force-stop. IDK why it doesn't stop itself
-//    printAllLogs()
-
-    Configurator()
-
+    tryConnect("192.168.0.39", "192.168.2.38")
+//    System.exit(0)
 //    printLogs()
+//    tryConnect("192.168.1.39")
+//    printLogs()
+    Timer().schedule(object: TimerTask() { override fun run() { System.exit(0)} }, 5000L) //hack to force-stop. IDK why it doesn't stop itself
 }

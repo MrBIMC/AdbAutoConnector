@@ -13,18 +13,12 @@ import java.util.*
 abstract class TimeoutTask<T>(val countdown: Long) {
     private val thread = Thread({
         val result = doInBackground()
-        if (!Thread.currentThread().isInterrupted()) {
-            onComplete(result)
-            Thread.currentThread().interrupt()
-        }
+        onComplete(result)
     })
 
     private val countDownTask = object: TimerTask() {
-        override fun run() {
-            if(!thread.isInterrupted()) {
-                thread.interrupt()
-                onInterrupt()
-            }
+        override fun run(){
+            thread.interrupt()
         }
     }
 
@@ -40,8 +34,4 @@ abstract class TimeoutTask<T>(val countdown: Long) {
      *  Function that is being executed in background
      */
     abstract fun doInBackground(): T
-    /**
-     *  Function that is being called when timer ran out
-     */
-    abstract fun onInterrupt()
 }

@@ -1,7 +1,6 @@
 package com.pavelsikun.kotlin.adbautoconnector.logic
 
 import com.pavelsikun.kotlin.adbautoconnector
-import com.pavelsikun.kotlin.adbautoconnector.logic.TimeoutTask
 import com.pavelsikun.kotlin.adbautoconnector.logic.log
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -69,26 +68,21 @@ fun tryConnect(from: String, to: String) {
 /**
  *  Tries to connect to a given ip
  *  @param waitBeforeStart is optional and tells how much time to wait before starting.
- *  Used when trying too many ips simultaniously.
+ *  Used when trying too many ips simultaneously.
  */
 fun tryConnect(ip: String, waitBeforeStart: Long = 0L) {
-    log("trying to connect to $ip ${if (waitBeforeStart != 0L) ", will wait $waitBeforeStart milliseconds before start" else ""}")
-    if(waitBeforeStart != 0L) Thread.sleep(waitBeforeStart) // little cooldown so all 100s of threads won't be called simultaniously
+    if(waitBeforeStart != 0L) Thread.sleep(waitBeforeStart)
 
-    object: TimeoutTask<String?>(1000) {
-        override fun onComplete(result: String?) {
-            if(result != null && !result.startsWith("unable")) {
-                log(result)
-                println("connected! $result")
-            } // todo notify
-        }
-
+    object: TimeoutTask<String?>(2000) {
         override fun doInBackground(): String? {
             val process = Runtime.getRuntime().exec("adb connect $ip")
             val inputStream = BufferedReader(InputStreamReader(process.getInputStream()))
             return inputStream.readLine()
         }
-
-        override fun onInterrupt() { /*NOTHING*/ }
+        override fun onComplete(result: String?) {
+            if(result != null && !result.startsWith("unable")) {
+                println(result)
+            } // todo notify
+        }
     }.start()
 }
