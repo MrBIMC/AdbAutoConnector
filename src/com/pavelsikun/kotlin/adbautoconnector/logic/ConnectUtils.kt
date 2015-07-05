@@ -81,8 +81,8 @@ fun tryConnect(ip: String, waitBeforeStart: Long = 0L) {
         }
         override fun onComplete(result: String?) {
             if(result != null && !result.startsWith("unable")) {
-                println(result)
-            } // todo notify
+                notify(result)
+            }
         }
     }.start()
 }

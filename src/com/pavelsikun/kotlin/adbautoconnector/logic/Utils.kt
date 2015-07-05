@@ -34,6 +34,29 @@ private val IPADDRESS_PATTERN =
 "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
 "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
 "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
-"([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
+"([01]?\\d\\d?|2[0-4]\\d|25[0-5])$"
 
 fun String.isValidIp() = Pattern.compile(IPADDRESS_PATTERN).matcher(this).matches()
+
+fun notify(msg: String) {
+    fun notifyMac() {
+        val command = """display notification "$msg" with title "ADB AutoConnecor" sound name "default" """
+        val code = arrayOf("osascript", "-e", command)
+        Runtime.getRuntime().exec(code)
+    }
+
+    fun notifyUnix() {
+        val command = """notify-send "ADB AutoConnecor" "$msg" """
+        Runtime.getRuntime().exec(command)
+    }
+
+    val os = System.getProperty("os.name").toLowerCase()
+    val isWindows = os.indexOf("win") >= 0
+    val isMac = os.indexOf("mac") >= 0
+    val isLinux = os.indexOf("nix") >= 0 || os.indexOf("nux") >= 0
+
+    if(isMac) notifyMac()
+    else if(isLinux) notifyUnix()
+//    else if(isWindows) notfyWindows() <- no way :(
+//    else idk what is this
+}

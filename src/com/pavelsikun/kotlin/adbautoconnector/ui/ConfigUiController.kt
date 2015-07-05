@@ -104,17 +104,22 @@ class ConfigUiController(val window: Configurator) {
         window.getSingleIpLabel().setVisible(visibility)
     }
 
-    private fun applyChanges(): Unit = when(config.mode) {
-        0 -> saveConfig(config)
-        1 -> {
-            config.single = window.getSingleIpTextField().getText()
-            saveConfig(config)
+    private fun applyChanges() {
+        when(config.mode) {
+            0 -> saveConfig(config)
+            1 -> {
+                config.single = window.getSingleIpTextField().getText()
+                saveConfig(config)
+            }
+            2 -> {
+                config.rangeFrom = window.getFromIpTextField().getText()
+                config.rangeTo = window.getToIpTextField().getText()
+                saveConfig(config)
+            }
         }
-        2 -> {
-            config.rangeFrom = window.getFromIpTextField().getText()
-            config.rangeTo = window.getToIpTextField().getText()
-            saveConfig(config)
-        }
+
+        window.getApplyChangesButton().setEnabled(false)
+        window.getApplyChangesButton().setText("No changes to Apply")
     }
 }
 
