@@ -1,5 +1,8 @@
 package com.pavelsikun.kotlin.adbautoconnector
 
+import com.pavelsikun.kotlin.adbautoconnector
+import com.pavelsikun.kotlin.adbautoconnector.logic.*
+import com.pavelsikun.kotlin.adbautoconnector.ui.Configurator
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.InetAddress
@@ -12,7 +15,11 @@ import kotlin.properties.Delegates
  */
 public fun main(vararg args: String) {
 //    tryConnect("192.168.0.102", "192.168.2.103")
-    tryConnect("192.168.1.39")
+//    tryConnect("192.168.1.39")
 //    Timer().schedule(object: TimerTask() { override fun run() { System.exit(0)} }, 10000L) //hack to force-stop. IDK why it doesn't stop itself
-    printAllLogs()
+//    printAllLogs()
+
+    Configurator()
+
+//    printLogs()
 }

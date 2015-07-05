@@ -1,4 +1,4 @@
-package com.pavelsikun.kotlin.adbautoconnector
+package com.pavelsikun.kotlin.adbautoconnector.logic
 
 import java.util.*
 
@@ -32,17 +32,14 @@ abstract class TimeoutTask<T>(val countdown: Long) {
         thread.start()
         Timer().schedule(countDownTask, countdown)
     }
-
     /**
      *  @param result returns data if task executed successfully
      */
     abstract fun onComplete(result: T)
-
     /**
      *  Function that is being executed in background
      */
     abstract fun doInBackground(): T
-
     /**
      *  Function that is being called when timer ran out
      */

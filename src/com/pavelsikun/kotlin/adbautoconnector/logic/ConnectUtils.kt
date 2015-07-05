@@ -1,5 +1,8 @@
-package com.pavelsikun.kotlin.adbautoconnector
+package com.pavelsikun.kotlin.adbautoconnector.logic
 
+import com.pavelsikun.kotlin.adbautoconnector
+import com.pavelsikun.kotlin.adbautoconnector.logic.TimeoutTask
+import com.pavelsikun.kotlin.adbautoconnector.logic.log
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.InetAddress
@@ -72,7 +75,7 @@ fun tryConnect(from: String, to: String) {
  *  Used when trying too many ips simultaniously.
  */
 fun tryConnect(ip: String, waitBeforeStart: Long = 0L) {
-    log("trying to connect to $ip ${if(waitBeforeStart != 0L) ", will wait $waitBeforeStart milliseconds before start" else ""}")
+    log("trying to connect to $ip ${if (waitBeforeStart != 0L) ", will wait $waitBeforeStart milliseconds before start" else ""}")
     if(waitBeforeStart != 0L) Thread.sleep(waitBeforeStart) // little cooldown so all 100s of threads won't be called simultaniously
 
     object: TimeoutTask<String?>(1000) {
