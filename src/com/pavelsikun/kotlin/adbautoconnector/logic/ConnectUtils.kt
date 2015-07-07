@@ -10,7 +10,6 @@ import java.util.*
 /**
  * Created by mrbimc on 04.07.15.
  */
-
 /**
  * Tries to connect to all of the ips from the same upnp zone, where computer is
  */
@@ -20,7 +19,6 @@ fun tryConnect() {
     val lastDot = ipBase.lastIndexOf('.')
     (0..255).forEach { tryConnect("${ipBase.substring(0, lastDot)}.$it", 50) }
 }
-
 /**
  * Tries to connect to each ip from a given range of ips
  */
@@ -64,7 +62,6 @@ fun tryConnect(from: String, to: String) {
     else log("invalid ips: $from, $to")
     log("finished checking ips in range of($from..$to)")
 }
-
 /**
  *  Tries to connect to a given ip
  *  @param waitBeforeStart is optional and tells how much time to wait before starting.

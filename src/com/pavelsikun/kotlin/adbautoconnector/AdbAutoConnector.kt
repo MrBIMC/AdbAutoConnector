@@ -25,15 +25,20 @@ object ConfiguratorStarter {
 object ScriptStarter {
     @platformStatic
     public fun main(vararg args: String) {
-        var config = openConfig()
-        when(config.mode) {
-            0 -> tryConnect()
-            1 -> tryConnect(config.single)
-            2 -> tryConnect(config.rangeFrom, config.rangeTo)
+        Runtime.getRuntime().exec("adb start-server").let {
+            val config = openConfig()
+            when (config.mode) {
+                0 -> tryConnect()
+                1 -> tryConnect(config.single)
+                2 -> tryConnect(config.rangeFrom, config.rangeTo)
+            }
+            Timer().schedule(object : TimerTask() {
+                override fun run() {
+                    log("finished executing")
+                    System.exit(0)
+                }
+            }, 5000L) //hack to force-stop.
         }
-        Timer().schedule(object: TimerTask() { override fun run() {
-            log("finished executing")
-            System.exit(0)} }, 5000L) //hack to force-stop.
     }
 }
 
