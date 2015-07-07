@@ -11,7 +11,7 @@ fun notify(msg: String) {
     }
 
     fun notifyUnix() {
-        val command = """notify-send "ADB AutoConnecor" "$msg" """
+        val command = arrayOf("notify-send", "ADB AutoConnecor", "$msg")
         Runtime.getRuntime().exec(command)
     }
 
