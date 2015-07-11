@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=0.5
+Name=ADB Connector
+GenericName=ADB AutoConnector
+Exec=java -jar ~/.adb/AdbAutoConnector.jar
+Terminal=false
+Icon=~/.adb/icon.png
+Type=Application
+Categories=Application;Android;Development;
